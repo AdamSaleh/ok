@@ -67,7 +67,7 @@ function ct(n,t) { if (n.t!=t) throw new Error(TN[t]+" expected, found "+TN[n.t]
 function p(x) { if (n(x).v<0||x.v%1!=0) { throw new Error("positive int expected."); } return x.v; }
 function ktos(x, esc) {
 	if (x.t != 3) { x = enlist(x); }
-	var h = x.v.some(function(v){ return (v.v<32||v.v>127)&v.v!=9&v.v!=10; });
+	var h = x.v.some(function(v){ return v.v<32&v.v!=9&v.v!=10; });
 	if (h) { return "0x"+x.v.map(h2).join(""); }
 	var r = x.v.map(function(k) { return String.fromCharCode(k.v); }).join("");
 	return esc ? '"'+EC.reduce(function(r,p) { return r.split(p[0]).join(p[1]); }, r)+'"' : r;
